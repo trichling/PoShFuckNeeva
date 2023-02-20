@@ -82,7 +82,7 @@
 Function Get-FuckingHelp {
 <#
 	.SYNOPSIS
-	Googles your last error message.
+	 Neevas your last error message.
 	.DESCRIPTION
 	Googles your last error message.
 	.EXAMPLE
@@ -358,9 +358,9 @@ Function Fixgit {
 	[string]$lastcommand
 )
 	Write-Verbose "Git command to fix: $lastcommand"
-	Invoke-Expression "$lastcommand 2>&1" -ErrorVariable gitres | Out-Null
-	$origcmd = ([string]$gitres[0]).split('')[1].Replace("'",'')
-	$correctedcmd = ([string]($gitres[1])).split('')[7]
+	$gitres = $(Invoke-Expression "$lastcommand 2>&1" -ErrorVariable gitres)
+	$origcmd = ([string]$gitres[0]).split("'")[1].Replace("'",'')
+	$correctedcmd = ([string]$gitres).split('The most similar command is')[1] 
 	
 	return $lastcommand -replace $origcmd,$correctedcmd
 }
